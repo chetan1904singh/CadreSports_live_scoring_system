@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10241c">
+    <title>Touchline — Live Football</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Touchline home"><span class="brand-mark">T</span> TOUCHLINE</a>
+      <span class="live-indicator"><span></span> LIVE MATCH CENTRE</span>
+    </header>
+
+    <main class="layout">
+      <section class="intro">
+        <p class="eyebrow">THE GAME, AS IT HAPPENS</p>
+        <h1>Every moment<br>on the <em>touchline.</em></h1>
+        <p class="intro-copy">A live football scoreboard for the people who make match day.</p>
+      </section>
+
+      <section class="match-picker panel" aria-labelledby="matches-heading">
+        <div class="section-heading">
+          <div><p class="eyebrow">MATCH CENTRE</p><h2 id="matches-heading">Choose a fixture</h2></div>
+          <span id="connection-state" class="connection">Connecting</span>
+        </div>
+        <label class="sr-only" for="match-select">Select a match</label>
+        <select id="match-select"><option value="">Loading matches…</option></select>
+      </section>
+
+      <section id="scoreboard" class="scoreboard panel" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow">LIVE SCORE</p>
+        <div class="score-row">
+          <div class="team-block"><span id="home-name" class="team-name">Home</span><span class="team-side">HOME</span></div>
+          <strong id="home-score" class="score">—</strong>
+          <span class="score-divider">:</span>
+          <strong id="away-score" class="score">—</strong>
+          <div class="team-block away"><span id="away-name" class="team-name">Away</span><span class="team-side">AWAY</span></div>
+        </div>
+        <div class="match-meta"><span id="match-status" class="status-badge">No match selected</span><span id="match-result"></span></div>
+      </section>
+
+      <section class="scorer panel" aria-labelledby="scorer-heading">
+        <div class="section-heading"><div><p class="eyebrow">MATCH OFFICIALS</p><h2 id="scorer-heading">Scorer’s desk</h2></div><span class="lock-mark">SCORER</span></div>
+        <form id="create-match-form" class="create-match">
+          <label>Home team<input name="homeTeam" required maxlength="80" placeholder="e.g. Harbor FC"></label>
+          <label>Away team<input name="awayTeam" required maxlength="80" placeholder="e.g. Summit United"></label>
+          <button class="button button-secondary" type="submit">Create fixture</button>
+        </form>
+        <div class="controls">
+          <div class="control-row">
+            <button id="start-button" class="button" type="button">Start match</button>
+            <button id="pause-button" class="button button-secondary" type="button">Pause</button>
+            <button id="resume-button" class="button button-secondary" type="button">Resume</button>
+            <button id="end-button" class="button button-danger" type="button">End match</button>
+          </div>
+          <form id="goal-form" class="goal-form">
+            <label>Scoring team<select name="team"><option value="home">Home</option><option value="away">Away</option></select></label>
+            <label>Player <span class="optional">(optional)</span><input name="playerName" maxlength="80" placeholder="Player name"></label>
+            <label>Minute<input name="minute" type="number" min="1" max="120" value="1" required></label>
+            <label>Added time<input name="addedMinute" type="number" min="0" max="30" value="0"></label>
+            <button class="button" type="submit">＋ Record goal</button>
+          </form>
+          <div class="undo-row"><p>Wrong call? Undo the latest active goal.</p><button id="undo-button" class="button button-quiet" type="button">Undo latest goal</button></div>
+        </div>
+        <p id="notice" class="notice" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="timeline panel" aria-labelledby="timeline-heading">
+        <div class="section-heading"><div><p class="eyebrow">OFFICIAL RECORD</p><h2 id="timeline-heading">Match timeline</h2></div><span id="event-count" class="event-count">0 events</span></div>
+        <ol id="event-list" class="event-list"><li class="empty-state">Select a fixture to view its event log.</li></ol>
+      </section>
+    </main>
+    <footer>TOUCHLINE <span>•</span> Community football, counted right.</footer>
+  </body>
+</html>
